@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyx - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Buraya tüm CSS'i index.html'inden alabilirsin */
+        * { box-sizing: border-box; margin:0; padding:0; font-family:'Roboto',sans-serif; }
+        body { background:#000; color:#fff; overflow-x:hidden; }
+        header{text-align:center; padding:20px 0;}
+        header img{width:120px; height:auto; margin-bottom:10px; transition: transform 0.5s;}
+        header img:hover{transform: rotate(-10deg) scale(1.1);}
+        header h1{color:#fff; text-shadow:0 0 10px #0ff;}
+        nav{background:rgba(0,0,0,0.7); padding:15px 0; box-shadow:0 2px 10px rgba(0,255,255,0.3);}
+        nav ul{list-style:none; display:flex; justify-content:center; gap:40px;}
+        nav ul li a{color:#fff; text-decoration:none; font-weight:700; font-size:16px; transition: color 0.3s, text-shadow 0.3s;}
+        nav ul li a:hover{color:#0ff; text-shadow:0 0 10px #0ff;}
+        main{padding:30px; text-align:center;}
+        footer{position:fixed; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.7); color:#0ff; font-size:12px; padding:8px 0; text-align:center; opacity:0.7;}
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="Logo">
+        <h1>Nyx</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Welcome to Nyx</h2>
+        <p>This is the Home page. Browse our site to see our offerings.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Dark Shop. All rights reserved.</p>
+        <p style="font-size:10px; opacity:0.6;">Used images are representational. Products will be delivered within 1-2 weeks.</p>
+    </footer>
+</body>
+</html>
