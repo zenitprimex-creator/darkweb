@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Admin Girişi</title>
+<style>
+body { background:#000; color:#0ff; font-family:sans-serif; text-align:center; padding:50px; }
+input { padding:10px; margin:5px; border-radius:5px; border:none; }
+button { padding:10px 20px; border:none; border-radius:5px; background:#0ff; color:#000; font-weight:bold; cursor:pointer; }
+#panel { display:none; margin-top:20px; }
+</style>
+</head>
+<body>
+
+<h2>Admin Girişi</h2>
+<div id="loginForm">
+    <input type="text" id="username" placeholder="Kullanıcı adı"><br>
+    <input type="password" id="password" placeholder="Şifre"><br>
+    <button onclick="login()">Giriş Yap</button>
+</div>
+
+<div id="panel">
+    <h2>Admin Paneline Hoşgeldiniz!</h2>
+    <p>Burada siteyi yönetebilirsiniz.</p>
+    <button onclick="logout()">Çıkış Yap</button>
+</div>
+
+<script>
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "1234"; // JS içinde tutuluyor, Vercel'de çalışacak tek yol
+
+function login() {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+
+    if(user === ADMIN_USER && pass === ADMIN_PASS) {
+        document.getElementById('loginForm').style.display = "none";
+        document.getElementById('panel').style.display = "block";
+    } else {
+        alert("Kullanıcı adı veya şifre yanlış!");
+    }
+}
+
+function logout() {
+    document.getElementById('panel').style.display = "none";
+    document.getElementById('loginForm').style.display = "block";
+    document.getElementById('username').value = "";
+    document.getElementById('password').value = "";
+}
+</script>
+
+</body>
+</html>
