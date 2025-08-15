@@ -8,44 +8,58 @@ body { background:#000; color:#0ff; font-family:sans-serif; text-align:center; p
 input { padding:10px; margin:5px; border-radius:5px; border:none; }
 button { padding:10px 20px; border:none; border-radius:5px; background:#0ff; color:#000; font-weight:bold; cursor:pointer; }
 #panel { display:none; margin-top:20px; }
+#panelMessages { text-align:left; max-width:600px; margin:20px auto; background:rgba(0,0,0,0.7); padding:15px; border-radius:10px; overflow:auto; max-height:400px; }
+.message { border-bottom:1px solid #0ff; padding:5px 0; }
 </style>
 </head>
 <body>
 
 <h2>Admin Girişi</h2>
 <div id="loginForm">
-    <input type="text" id="username" placeholder="Kullanıcı adı"><br>
-    <input type="password" id="password" placeholder="Şifre"><br>
-    <button onclick="login()">Giriş Yap</button>
+<input type="text" id="username" placeholder="Kullanıcı adı"><br>
+<input type="password" id="password" placeholder="Şifre"><br>
+<button onclick="login()">Giriş Yap</button>
 </div>
 
 <div id="panel">
-    <h2>Admin Paneline Hoşgeldiniz!</h2>
-    <p>Burada siteyi yönetebilirsiniz.</p>
-    <button onclick="logout()">Çıkış Yap</button>
+<h2>Admin Paneline Hoşgeldiniz!</h2>
+<p>Burada siteyi yönetebilirsiniz.</p>
+<div id="panelMessages">Mesajlar yükleniyor...</div>
+<button onclick="logout()">Çıkış Yap</button>
 </div>
 
 <script>
 const ADMIN_USER = "admin";
-const ADMIN_PASS = "1234"; // JS içinde tutuluyor, Vercel'de çalışacak tek yol
+const ADMIN_PASS = "1234";
+
+async function loadMessages() {
+  const res = await fetch("/api/getMessages");
+  const messages = await res.json();
+  const container = document.getElementById("panelMessages");
+  if(messages.length === 0){
+    container.innerHTML = "<p>Henüz mesaj yok.</p>";
+    return;
+  }
+  container.innerHTML = messages.map(m => `<div class="message"><b>${m.name}</b> (${m.email}):<br>${m.message}</div>`).join("");
+}
 
 function login() {
-    const user = document.getElementById('username').value;
-    const pass = document.getElementById('password').value;
-
-    if(user === ADMIN_USER && pass === ADMIN_PASS) {
-        document.getElementById('loginForm').style.display = "none";
-        document.getElementById('panel').style.display = "block";
-    } else {
-        alert("Kullanıcı adı veya şifre yanlış!");
-    }
+  const user = document.getElementById('username').value;
+  const pass = document.getElementById('password').value;
+  if(user === ADMIN_USER && pass === ADMIN_PASS){
+    document.getElementById('loginForm').style.display = "none";
+    document.getElementById('panel').style.display = "block";
+    loadMessages();
+  } else {
+    alert("Kullanıcı adı veya şifre yanlış!");
+  }
 }
 
 function logout() {
-    document.getElementById('panel').style.display = "none";
-    document.getElementById('loginForm').style.display = "block";
-    document.getElementById('username').value = "";
-    document.getElementById('password').value = "";
+  document.getElementById('panel').style.display = "none";
+  document.getElementById('loginForm').style.display = "block";
+  document.getElementById('username').value = "";
+  document.getElementById('password').value = "";
 }
 </script>
 
